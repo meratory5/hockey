@@ -313,8 +313,18 @@ function updatePaddlePhysics(paddle, player, dt) {
   if (dist > 1) {
     const nx = dx / dist;
     const ny = dy / dist;
-    const accelX = nx * PADDLE_ACCELERATION * dt;
-    const accelY = ny * PADDLE_ACCELERATION * dt;
+
+    // 距離に比例した加速度の減衰（近づくほど弱くなる）
+    const DAMPING_DISTANCE = 50.0; // この距離以下で減衰開始
+    let accelMultiplier = 1.0;
+
+    if (dist < DAMPING_DISTANCE) {
+      // 距離が近いほど加速度を小さくする（0.2倍〜1.0倍の範囲）
+      accelMultiplier = 0.2 + 0.8 * (dist / DAMPING_DISTANCE);
+    }
+
+    const accelX = nx * PADDLE_ACCELERATION * accelMultiplier * dt;
+    const accelY = ny * PADDLE_ACCELERATION * accelMultiplier * dt;
     paddle.vx += accelX;
     paddle.vy += accelY;
   }
