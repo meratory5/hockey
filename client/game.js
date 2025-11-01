@@ -9,7 +9,7 @@ let spinDirection = 0; // 0=停止, 1=左回転, -1=右回転
 // サーバーURL（本番環境では変更）
 const SERVER_URL = window.location.hostname === 'localhost'
   ? 'http://localhost:3000'
-  : window.location.origin;
+  : 'https://hockey-game-server.onrender.com';
 
 // 初期化
 document.addEventListener('DOMContentLoaded', () => {
