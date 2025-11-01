@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Hockey - Online Multiplayer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="nickname-screen" class="screen">
+            <div class="modal">
+                <h1>Air Hockey</h1>
+                <p class="subtitle">Online Multiplayer Game</p>
+                <input type="text" id="nickname-input" placeholder="Enter your nickname" maxlength="12" autocomplete="off">
+                <button id="join-button">Join Game</button>
+                <p class="info">Max 12 characters, alphanumeric only</p>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen" style="display: none;">
+            <div id="game-container">
+                <canvas id="game-canvas" width="800" height="600"></canvas>
+                <div id="info-panel">
+                    <div id="connection-status">Connecting...</div>
+                    <div id="controls-help">
+                        <h3>Controls:</h3>
+                        <p><strong>Mouse:</strong> Move paddle</p>
+                        <p><strong>Left Click (Hold):</strong> Spin Left</p>
+                        <p><strong>Right Click (Hold):</strong> Spin Right</p>
+                        <p><strong>Click:</strong> Ready / Play Again</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
