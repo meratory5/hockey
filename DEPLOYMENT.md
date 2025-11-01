@@ -20,15 +20,7 @@
 
 ### ファイル構成
 ```
-web_version/
-├── server/           # サーバー側（Node.js）
-│   ├── server.js
-│   ├── physics.js
-│   └── package.json
-└── client/           # クライアント側（HTML/CSS/JS）
-    ├── index.html
-    ├── game.js
-    └── style.css
+
 ```
 
 ---
@@ -78,18 +70,30 @@ git push -u origin main
 
 #### 3. クライアントをGitHub Pagesにデプロイ
 
-1. `client/game.js`を編集し、SERVER_URLを更新：
+**重要**: `/client`フォルダは直接選択できないため、GitHub Actionsを使用します。
+
+1. `client/game.js`のSERVER_URLを更新（既に設定済みの場合はスキップ）：
 
 ```javascript
-const SERVER_URL = 'https://hockey-game-server.onrender.com';
+const SERVER_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:3000'
+  : 'https://YOUR-RENDER-APP.onrender.com';  // RenderのURLに変更
 ```
 
-2. GitHubリポジトリの「Settings」→「Pages」
-3. Source: `Deploy from a branch`
-4. Branch: `main`、フォルダ: `/client`
-5. 「Save」をクリック
+2. 変更をコミット＆プッシュ：
 
-6. 数分後、`https://YOUR_USERNAME.github.io/hockey-game/`でアクセス可能
+```bash
+git add .
+git commit -m "Add GitHub Actions deployment"
+git push origin main
+```
+
+3. GitHubリポジトリの「Settings」→「Pages」
+4. **Source**: `GitHub Actions`を選択
+5. 自動的に`.github/workflows/deploy.yml`が検出されます
+6. Actionsタブで自動デプロイを確認
+
+7. 数分後、`https://YOUR_USERNAME.github.io/REPO_NAME/`でアクセス可能
 
 #### 4. CORS設定（既に設定済み）
 
